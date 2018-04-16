@@ -43,7 +43,7 @@ libraries:
         else \
             curl -sL https://download.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-${X264_VERSION}.tar.bz2 | tar -jx --strip-components=1 ; \
         fi ; \
-            ./configure --prefix="${PREFIX}" --enable-shared --enable-pic --disable-cli ; \
+            ./configure --prefix="${PREFIX}" --enable-shared --enable-pic ; \
         make ; \
         make install
   x265:
@@ -59,7 +59,7 @@ libraries:
         tar -zx --strip-component=1 -f x265_${X265_VERSION}.tar.gz ; \
         cd build/linux ; \
         sed -i "/-DEXTRA_LIB/ s/$/ -DCMAKE_INSTALL_PREFIX=\${PREFIX}/" multilib.sh ; \
-        sed -i "/^cmake/ s/$/ -DENABLE_CLI=OFF/" multilib.sh ; \
+        sed -i "/^cmake/ s/$/ -DENABLE_CLI=ON/" multilib.sh ; \
         ./multilib.sh ; \
         make -C 8bit install
   opencoreamr:
@@ -147,7 +147,7 @@ libraries:
     buildscript: |
       curl -sL https://cfhcable.dl.sourceforge.net/project/lame/lame/$(echo ${LAME_VERSION} | sed -e 's/[^0-9]*\([0-9]*\)[.]\([0-9]*\)[.]\([0-9]*\)\([0-9A-Za-z-]*\)/\1.\2/')/lame-${LAME_VERSION}.tar.gz | \
       tar -zx --strip-components=1 ; \
-      ./configure --prefix="${PREFIX}" --bindir="${PREFIX}/bin" --enable-shared --enable-nasm --enable-pic --disable-frontend ; \
+      ./configure --prefix="${PREFIX}" --bindir="${PREFIX}/bin" --enable-shared --enable-nasm --enable-pic --enable-frontend ; \
       make ; \
       make install
   ass:
@@ -180,20 +180,25 @@ libraries:
     versions:
       1.3.5:
         sha256sum: 6efbcecdd3e5dfbf090341b485da9d176eb250d893e3eb378c428a2db38301ce
-    buildscript: "curl -sLO http://downloads.xiph.org/releases/vorbis/libvorbis-${VORBIS_VERSION}.tar.gz
-      ; \\\necho \"${VORBIS_SHA256SUM}  libvorbis-${VORBIS_VERSION}.tar.gz\" | sha256sum
-      --check  ; \\\ntar -zx --strip-components=1 -f libvorbis-${VORBIS_VERSION}.tar.gz
-      ; \\\n./configure --prefix=\"${PREFIX}\" --with-ogg=\"${PREFIX}\" --enable-shared
-      ; \\\nmake ; \\\nmake install \n"
+    buildscript: |
+      curl -sLO http://downloads.xiph.org/releases/vorbis/libvorbis-${VORBIS_VERSION}.tar.gz ; \
+      echo "${VORBIS_SHA256SUM}  libvorbis-${VORBIS_VERSION}.tar.gz" | sha256sum --check  ; \
+      tar -zx --strip-components=1 -f libvorbis-${VORBIS_VERSION}.tar.gz ; \
+      ./configure --prefix="${PREFIX}" --with-ogg="${PREFIX}" --enable-shared ; \
+      make ; \
+      make install
   vpx:
     url: https://www.webmproject.org
     versions:
       1.7.0:
       1.6.1: 
-    buildscript: "curl -sL https://codeload.github.com/webmproject/libvpx/tar.gz/v${VPX_VERSION}
-      | \\\ntar -zx --strip-components=1 ; \\\n./configure --prefix=\"${PREFIX}\"
-      --enable-vp8 --enable-vp9 --enable-pic --enable-shared \\\n--disable-debug --disable-examples
-      --disable-docs --disable-install-bins ; \\\nmake ; \\\nmake install \n"
+    buildscript: |
+      curl -sL https://codeload.github.com/webmproject/libvpx/tar.gz/v${VPX_VERSION} | \
+      tar -zx --strip-components=1 ; \
+      ./configure --prefix="${PREFIX}" --enable-vp8 --enable-vp9 --enable-pic --enable-shared \
+      --disable-debug --disable-examples --disable-docs --enable-install-bins ; \
+      make ; \
+      make install
   xvid:
     url: https://www.xvid.com
     versions:
@@ -203,7 +208,7 @@ libraries:
       curl -sLO http://downloads.xvid.org/downloads/xvidcore-${XVID_VERSION}.tar.gz ; \
       tar -zx -f xvidcore-${XVID_VERSION}.tar.gz ; \
       cd xvidcore/build/generic ; \
-      ./configure --prefix="${PREFIX}" --bindir="${PREFIX}/bin" --datadir="${PWD}" --enable-shared --enable-shared ; \
+      ./configure --prefix="${PREFIX}" --bindir="${PREFIX}/bin" --datadir="${PWD}" --enable-shared ; \
       make ; \
       make install
   vidstab:

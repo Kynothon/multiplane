@@ -78,7 +78,7 @@ if echo ${X264_VERSION} | grep -q '^last'; then \
 else \
     curl -sL https://download.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-${X264_VERSION}.tar.bz2 | tar -jx --strip-components=1 ; \
 fi ; \
-    ./configure --prefix="${PREFIX}" --enable-shared --enable-pic --disable-cli ; \
+    ./configure --prefix="${PREFIX}" --enable-shared --enable-pic ; \
 make ; \
 make install ; \
 rm -rf ${dir}
@@ -95,7 +95,7 @@ echo "${X265_MD5SUM}  x265_${X265_VERSION}.tar.gz" | md5sum --check ; \
 tar -zx --strip-component=1 -f x265_${X265_VERSION}.tar.gz ; \
 cd build/linux ; \
 sed -i "/-DEXTRA_LIB/ s/$/ -DCMAKE_INSTALL_PREFIX=\${PREFIX}/" multilib.sh ; \
-sed -i "/^cmake/ s/$/ -DENABLE_CLI=OFF/" multilib.sh ; \
+sed -i "/^cmake/ s/$/ -DENABLE_CLI=ON/" multilib.sh ; \
 ./multilib.sh ; \
 make -C 8bit install ; \
 rm -rf ${dir}
@@ -138,7 +138,7 @@ mkdir -p ${dir} ; \
 cd ${dir} ; \
 curl -sL https://cfhcable.dl.sourceforge.net/project/lame/lame/$(echo ${LAME_VERSION} | sed -e 's/[^0-9]*\([0-9]*\)[.]\([0-9]*\)[.]\([0-9]*\)\([0-9A-Za-z-]*\)/\1.\2/')/lame-${LAME_VERSION}.tar.gz | \
 tar -zx --strip-components=1 ; \
-./configure --prefix="${PREFIX}" --bindir="${PREFIX}/bin" --enable-shared --enable-nasm --enable-pic --disable-frontend ; \
+./configure --prefix="${PREFIX}" --bindir="${PREFIX}/bin" --enable-shared --enable-nasm --enable-pic --enable-frontend ; \
 make ; \
 make install ; \
 rm -rf ${dir}
@@ -202,7 +202,7 @@ cd ${dir} ; \
 curl -sL https://codeload.github.com/webmproject/libvpx/tar.gz/v${VPX_VERSION} | \
 tar -zx --strip-components=1 ; \
 ./configure --prefix="${PREFIX}" --enable-vp8 --enable-vp9 --enable-pic --enable-shared \
---disable-debug --disable-examples --disable-docs --disable-install-bins ; \
+--disable-debug --disable-examples --disable-docs --enable-install-bins ; \
 make ; \
 make install ; \
 rm -rf ${dir}
@@ -218,7 +218,7 @@ cd ${dir} ; \
 curl -sLO http://downloads.xvid.org/downloads/xvidcore-${XVID_VERSION}.tar.gz ; \
 tar -zx -f xvidcore-${XVID_VERSION}.tar.gz ; \
 cd xvidcore/build/generic ; \
-./configure --prefix="${PREFIX}" --bindir="${PREFIX}/bin" --datadir="${PWD}" --enable-shared --enable-shared ; \
+./configure --prefix="${PREFIX}" --bindir="${PREFIX}/bin" --datadir="${PWD}" --enable-shared ; \
 make ; \
 make install ; \
 rm -rf ${dir}
