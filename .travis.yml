@@ -31,6 +31,6 @@ script:
 after_script:
 - docker images
 after_success:
-- docker login -u $DOCKER_USER -p $DOCKER_PASS
+- echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
 - export REPO=kynothon/multiplane
 - docker push ${image}
