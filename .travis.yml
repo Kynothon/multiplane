@@ -1,34 +1,42 @@
 sudo: required
-
 language: bash
 services: docker
-
 env:
- - VERSION=3.4 VARIANT=alpine
- - VERSION=3.4 VARIANT=scratch
- - VERSION=3.4 VARIANT=debian
- - VERSION=snapshot VARIANT=alpine
- - VERSION=snapshot VARIANT=scratch
- - VERSION=snapshot VARIANT=debian
-
-
+  matrix:
+  - VERSION=3.4 VARIANT=alpine
+  - VERSION=3.4 VARIANT=scratch
+  - VERSION=3.4 VARIANT=debian
+  - VERSION=snapshot VARIANT=alpine
+  - VERSION=snapshot VARIANT=scratch
+  - VERSION=snapshot VARIANT=debian
+  global:
+  - secure: uZ5CXDxTHtIGN/Yl9HURNxI34OoK6xGQ+u7CLnTcRm3ntrKitUstJko2U1S4iA0DSOkajiPJQ1QzKnZQMCCoyEHJxYZv4g+mjBg9iKbDbCm6p3vZ28GbTi4UaAyMKl/VQQrgAfGRnJRZCEhC1rqpGb+iXSnXU52g7LiyXPrb6UFAnTShDxXIRjpRzqLDKZH6Uzl9DL6wMXAeFhSnAkLbxZzrt+l6K8rYEG5HR76FFxOU10pT7X932tYLPJ9Fpqz4o75eWehTphh9JR4rWsYViHM4iC7+NtyzV0KfOx9KGc2zCaaxekaMgCmBJKPC17Eer/bDJA4swN0YHNB8sdVklXfNG8WvhXaRNA25xmWqQ2k8r5itmK6daOwH9uuky1+TME8Hq4tr2oqTDz2E2x0MmLcRmv9l4vR+PDzQNPSU2bYufO3yHrbHUNIriJzmB8+skK8A/bBbM5e1Lya4v9n8/HQjAMrbbavbudb8kL5DmZjp0KRzy6zzCepGUOWEJ18nrvlrYSRHC0efzpu61W4qxJY7rebR5cAjxSiMRNvjMPeEHJcQaVWgIB7UYIFl+0Db5Oal7GTKE3HsGPbbt1RFywZh5fypdjNEnETiYwfM8M6CW4ZVeavwHmyxxhQB0jisgzb3QzVXQdDbM4z5kA533GjTamuJZD3XNWRyKoK0sN8=
+  - secure: 3DoKBh6AExxQ6JEU7pT5BiujHChZ5BYXKvj9eZMtgLD7lkFR8DSakKNgmhlIARs9JWaEhEIONO3S25ejKvIEDPF7qVeTUrEdIgjkvrIrtBb76cV5jCHLWUE92pMOqq/2P2aIMR0qwm4u4w7O81ym+jicVXJm4b3NhzzguuCVSe9q6uQ4OvEtYNPTjt0rzrzgNuUou7F3HvXxGOAj/TE2cc/cCMlCC6mNCmjlG5MsAAtOwBkKIUCvHbrVoKjlDoKSg3yniwkwtsqozFF3OugXRrVFmR+O+VUkGyUZTPqQzke0s0n9JBKhOjOXdHNV6R9F0GrixmoSSaXvktpO+G4w/RApK41QYT9TCS3RGAspy3/Il0Iai/PWKu2m1PgqWnSkkR+eUtIEjkyGrFxuIyTeKXws9b8ZWIFzLIyu8jVgN+RDitnXub4K4ki2qdeyuqElH+C4bfgo6f1AkG/v9fmxA2CdOasJew2CWlGlGhW1hjhZKqs6FMv4OBs8yQCVoQrgcxTs91oAF6d8v305yv58z9z0KqAXcyI8Bl+MruZMkQ2tLwrvwou4oshJ7eensLW1xugdUR16tUWfvrYPmGRrT3+xJcbXnItFLfuwqClxGNdIIOEy6gkIPATf8av1AfEJLflKnEnBaUA14S18IKJVH8v3rqFm3xdUpLKn6fbB6Wc=
+  - secure: YaS6UoR7q/naMa+0HNHtSSJD5Y10DRof9vRwWAjS1L7BOa/nNNQNJs0WJ6v+RP/fkk7G72hx0z9PjoZcZvgF+8mr3vHIJ9N1nZKOjP5Q5fLBKbqmDuUun2/RWL1oIdx91HLrqFxa3GGXKb+QHFs9NzXlOGKk6Btinn5xz3MbnSIQbx8ppS/DKqg8uC0pCGdc2bb/6TZ4Q8XSVT9BzLaKoe9Jv7Fb16lkAuQ+gcIQfdvXXgXWAeObJXb3oVfZQDH7UmMpFzgdzBCGWpzlHAKhWt0/9Smitq1R7KzD8HMKe1XOi8PHLfs1pVjaZLZpNaayH0EudSy8TZtsoF46j+5NTeWbA/jFc4hiyTF4Ceeh5IsTbZLpUP1bLLfvFKbFyiWC2gz74rUu8R95UR13e1b6y2jEsSGpyFmbm467YWC6J4zpBUHt7JxwciEPR4B7TleTplGPmPuRd+KyFQS2daxPREfkLoukXu7CW9Ay9PjkDUGTdqlcnI76vrtF19vK8UHVi7sM1+S7xVNnlA5SpvdoVxO2eKmvw7UPNUhlgLjRPkMq/e63vj3cR+6fQ1eJY69m7b3F6HPVi2NXappxs0D7pzkVj//v/QDYnxzKUfdSSp4S/6Op/D8OpTCLG9j6AP4qwlXpOiZTFBsNasO1FK0iXE0eMcv+2/wPZq+QSXet8Ok=
 branches:
   only:
-    - "master"
-
+  - master
 before_install:
-    - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-    - sudo apt-get update
-    - sudo apt-get -y install docker-ce
-
+- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+- sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu
+  $(lsb_release -cs) stable"
+- sudo apt-get update
+- sudo apt-get -y install docker-ce
 before_script:
-  - env | sort
-  - image="ffmpeg:${VERSION}-${VARIANT:-ubuntu}"
-
+- env | sort
+- image="ffmpeg:${VERSION}-${VARIANT:-ubuntu}"
 script:
-  - docker build -t "${image}" --build-arg MAKEFLAGS="-j$(($(grep -c ^processor /proc/cpuinfo) + 1))" docker-images/${VERSION}/${VARIANT}
-
+- docker build -t "${image}" --build-arg MAKEFLAGS="-j$(($(grep -c ^processor /proc/cpuinfo)
+  + 1))" docker-images/${VERSION}/${VARIANT}
 after_script:
-  - docker images
-# vim:set et ts=2 sw=2:
+- docker images
+
+after_success:
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+  - export REPO=kynothon/multiplane
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - docker build -f Dockerfile -t $REPO:$COMMIT .
+  - docker tag $REPO:$COMMIT $REPO:$TAG
+  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+  - docker push $REPO
+
