@@ -24,7 +24,7 @@ before_install:
 - sudo apt-get -y install docker-ce
 before_script:
 - env | sort
-- image="multiplane:${VERSION}-${VARIANT:-ubuntu}"
+- image="kynothon/multiplane:${VERSION}-${VARIANT:-ubuntu}"
 script:
 - docker build -t "${image}" --build-arg MAKEFLAGS="-j$(($(grep -c ^processor /proc/cpuinfo)
   + 1))" docker-images/${VERSION}/${VARIANT}
@@ -32,5 +32,4 @@ after_script:
 - docker images
 after_success:
 - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-- export REPO=kynothon/multiplane
 - docker push ${image}
