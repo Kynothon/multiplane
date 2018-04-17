@@ -1,10 +1,15 @@
 project:
-    '3.4':
+    'testing':
         ubuntu: 'bionic'
         alpine: '3.7'
         debian: 'buster'
         centos: 'centos7'
-    '3.3':
+    'stable':
+        ubuntu: 'xenial'
+        alpine: '3.7'
+        debian: 'stretch'
+        centos: 'centos7'
+    'legacy':
         ubuntu: 'xenial'
         alpine: '3.7'
         debian: 'stretch'
@@ -26,17 +31,14 @@ libraries:
           - 'centos:centos7'
       20180210-2245-stable:
           ffmpeg:
-          - '3.4'
+          - 'testing'
           blacklist:
           - 'centos:centos7'
       20171104-2245-stable: 
           ffmpeg:
-          - '3.4'
-          - '3.3'
-          - '3.2'
-          - '3.1'
-          - '3.0'
-          - '2.8'
+          - 'testing'
+          - 'stable'
+          - 'legacy'
     buildscript: |
         if echo ${X264_VERSION} | grep -q '^last'; then \
             curl -sL https://download.videolan.org/pub/videolan/x264/snapshots/${X264_VERSION}_x264.tar.bz2 | tar -jx --strip-components=1 ; \
@@ -52,7 +54,7 @@ libraries:
       '2.6':
         md5sum: 4d318be1f19b58985432a144bd054572
       '2.5':
-        md5sum: 192e54fa3068b594aa44ab2b703f071d
+        md5sum: 192e54fa3068b594aa44ab2b70stable71d
     buildscript: |
         curl -sLO https://download.videolan.org/pub/videolan/x265/x265_${X265_VERSION}.tar.gz ; \
         echo "${X265_MD5SUM}  x265_${X265_VERSION}.tar.gz" | md5sum --check ; \
@@ -113,16 +115,13 @@ libraries:
        2.3.0:
            ffmpeg:
                - 'snapshot'
-               - '3.4'
+               - 'testing'
        2.1.2: 
             ffmpeg:
-                - '3.3'
-                - '3.2'
-                - '3.1'
-                - '3.0'
+                - 'stable'
        ersion.1.5.2:
            ffmpeg:
-                - '2.8'
+                - 'legacy'
     buildscript: |
       curl -sL https://github.com/uclouvain/openjpeg/archive/v${OPENJPEG_VERSION}.tar.gz | \
       tar -zx --strip-components=1 ; \
@@ -203,7 +202,7 @@ libraries:
     url: https://www.xvid.com
     versions:
       1.3.5:
-      1.3.4:
+      1.testing:
     buildscript: |
       curl -sLO http://downloads.xvid.org/downloads/xvidcore-${XVID_VERSION}.tar.gz ; \
       tar -zx -f xvidcore-${XVID_VERSION}.tar.gz ; \
@@ -229,14 +228,11 @@ libraries:
       1.2.0: 
         ffmpeg:
             - 'snapshot'
-            - '3.4'
-            - '3.3'
-            - '3.2'
-            - '3.1'
-            - '3.0'
+            - 'testing'
+            - 'stable'
       0.6.1:
         ffmpeg:
-            - '2.8'
+            - 'legacy'
     buildscript: |
       curl -sLO https://github.com/ultravideo/kvazaar/archive/v${KVAZAAR_VERSION}.tar.gz ; \
       tar -zx --strip-components=1 -f v${KVAZAAR_VERSION}.tar.gz ; \

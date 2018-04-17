@@ -1,4 +1,4 @@
-FROM debian:buster as base
+FROM debian:stretch as base
 
 WORKDIR /tmp/workdir
 

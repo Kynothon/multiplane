@@ -23,11 +23,6 @@ options.list_variants = false
 options.quiet = false
 options.show = false
 OptionParser.new do |opt|
-    opt.on("-m",
-           "--minimal",
-           "Generate a FROM scratch Dockerfile") do |o|
-        options[:minimal] = true
-    end
     opt.on("-q",
            "--quiet",
            "Only display values") do |o|
@@ -41,10 +36,6 @@ OptionParser.new do |opt|
     opt.on("-v", 
            "--project VERSION",
            "Set the project version (default: \"#{options.project_version}\")") do |o|
-               if !(o == 'snapshot' or o.to_str.split('.').length.between?(2,3)) then
-                   STDERR.puts "Version must be MAJOR.minor(.release)"
-                   exit(1)
-               end
                options[:project_version] = o
            end
     opt.on("-l",
@@ -79,16 +70,16 @@ OptionParser.new do |opt|
 	end
 end.parse!
 
-semver = /[^0-9]*([0-9]*)[.]([0-9]*)[.]?([0-9]*)([0-9A-Za-z-]*)/.match(options.project_version.to_s)
-if options.project_version != 'snapshot' and semver[3] == '' then
-    idx = project_versions.index { |v| v.start_with? options.project_version.to_s }
-    if idx.nil? then
-        STDERR.puts "No suitable version found for %s" % options.project_version
-        exit (1)
-    end
-    options.project_version = project_versions[idx]
-end
-project_semver = options.project_version == 'snapshot' ? "snapshot" : "#{semver[1]}.#{semver[2]}"
+#semver = /[^0-9]*([0-9]*)[.]([0-9]*)[.]?([0-9]*)([0-9A-Za-z-]*)/.match(options.project_version.to_s)
+#if options.project_version != 'snapshot' and semver[3] == '' then
+#    idx = project_versions.index { |v| v.start_with? options.project_version.to_s }
+#    if idx.nil? then
+#        STDERR.puts "No suitable version found for %s" % options.project_version
+#        exit (1)
+#    end
+#    options.project_version = project_versions[idx]
+#end
+project_semver = options.project_version
 
 if ! options.variant.include? ":"
     options.variant += ':' + global_config['project'][options.project_version][options.variant]

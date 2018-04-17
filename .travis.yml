@@ -3,11 +3,9 @@ language: bash
 services: docker
 env:
   matrix:
-  - VERSION=3.4 VARIANT=alpine
-  - VERSION=3.4 VARIANT=scratch
-  - VERSION=3.4 VARIANT=debian
+  - VERSION=stable VARIANT=alpine
+  - VERSION=stable VARIANT=debian
   - VERSION=snapshot VARIANT=alpine
-  - VERSION=snapshot VARIANT=scratch
   - VERSION=snapshot VARIANT=debian
   global:
   - secure: q9qhGDxJU5WOTq6MIsPwd7kZe7Ue/YjAmWTpnrMIBhirVZt4UzInw+xlyxJc/yyqzyB9+712MtT3ePSnpo2MtxiHUIcBgBJ+eFE7OqFZ9KG04wUe1lat8HkhvhxPxLD1wRR10bFIpXPPrnnHXLCkbGC/7YAFxDDB44mv0+kZc3mKeO8qjrPSpQgyh/yZYEtOVMb+sCJ314BXIBocHKbSdpaXlYdblueDVz1y/4lJjtiNxRrupTADM4uurPMz5GutUwbJs3i+VPNDX5wREuJeoSjwl6jE07QhW67ExIgG1CDSJyC1QJzaT/atXJwXOIX/wv5fOdM+RKz2V5ZwoH7GiLIrrPYymRzI32xfsKmUEyIbs2TrbjIlEZ+bCYJ8furCGf0UdQu1PsVUUaT3w9ZOhKJuExh9gAqAH9G/7fvu8y4cJKlJqavtpNMjM4kmTqUN1/vLaIIkgWodpMXiQMta7oZ8unCHpQMOlQlci+M0GKy1Vd6zZUYS/Cd2FakCDNmg7JmjgmniTAGp86+PV2hmPt/jZAwmNZQtmQ585kKFwuH3HInPXAqEJ03Hk22BHFJvXQUr3zu1IEKmQ9HthUW3CTwiPdBD9jsh7mtgM1jwTqgIKQi3aoEIdV7JAENTNf+D/u7ZZTer7rLOuTgYABHytzpzSqsImDyVqimej2yxU7A=

@@ -1,4 +1,4 @@
-project 3.3 on alpine:3.7
+project snapshot on ubuntu:bionic
  - x264: 20171104-2245-stable
  - x265: 2.6
  - opencoreamr: 0.1.5

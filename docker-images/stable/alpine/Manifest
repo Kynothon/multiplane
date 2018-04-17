@@ -1,4 +1,4 @@
-project 3.4 on alpine:3.7
+project stable on alpine:3.7
  - x264: 20171104-2245-stable
  - x265: 2.6
  - opencoreamr: 0.1.5

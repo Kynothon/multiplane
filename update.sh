@@ -22,22 +22,14 @@ travis_matrix=""
 
 for version in `${iwantplate} --list-versions --quiet | tr -d '\r'`; do
     for variant in `${iwantplate} --list-variants --quiet | tr -d '\r'`; do
-        release=`echo $version | sed -e "s/$semver_re/\1.\2/"`
+        release="$version"
         echo "multiplane:${release} (${version}): ${variant}"
         mkdir -p ${dockerfile_dir}/${release}/${variant}
-        sh ${iwantplate} -V ${variant} -v ${version} > ${dockerfile_dir}/${release}/${variant}/Dockerfile
-        #sh ${iwantplate} -s -V ${variant} -v ${version} > ${dockerfile_dir}/${release}/${variant}/Manifest &
+        sh ${iwantplate} -V ${variant} -v ${version} > ${dockerfile_dir}/${release}/${variant}/Dockerfile &
+        sh ${iwantplate} -s -V ${variant} -v ${version} > ${dockerfile_dir}/${release}/${variant}/Manifest &
         if echo ${autobuild} | grep -q "$variant"; then
             travis_matrix="${travis_matrix} - VERSION=${release} VARIANT=${variant}\n"
         fi
-
-        if [ "${variant}" = "${scratch_variant}" ]; then
-            echo "multiplane:${release} (${version}): scratch (${scratch_variant})"
-            mkdir -p ${dockerfile_dir}/${release}/scratch
-            sh ${iwantplate} -V ${variant} -v ${version} -m > ${dockerfile_dir}/${release}/scratch/Dockerfile &
-            sh ${iwantplate} -s -V ${variant} -v ${version} > ${dockerfile_dir}/${release}/${variant}/Manifest &
-            travis_matrix="${travis_matrix} - VERSION=${release} VARIANT=scratch\n"
-        fi;
     done
 done
 wait

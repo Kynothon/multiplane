@@ -1,4 +1,4 @@
-FROM debian:buster as base
+FROM ubuntu:xenial as base
 
 WORKDIR /tmp/workdir
 
