@@ -67,7 +67,7 @@ rm -rf ${dir}
 
 
 
-ARG X264_VERSION=20171104-2245-stable
+ARG X264_VERSION=last_stable
 RUN set -e ;\
 dir=/tmp/x264 ;\
 mkdir -p ${dir} ;\

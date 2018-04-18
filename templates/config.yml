@@ -25,17 +25,17 @@ libraries:
     url: https://www.videolan.org/developers/x264.html
     versions:
       last_stable:
-          ffmpeg:
+          project:
           - 'snapshot'
           blacklist:
           - 'centos:centos7'
       20180210-2245-stable:
-          ffmpeg:
+          project:
           - 'testing'
           blacklist:
           - 'centos:centos7'
       20171104-2245-stable: 
-          ffmpeg:
+          project:
           - 'testing'
           - 'stable'
           - 'legacy'
@@ -113,14 +113,14 @@ libraries:
     url: http://www.openjpeg.org
     versions:
        2.3.0:
-           ffmpeg:
+           project:
                - 'snapshot'
                - 'testing'
        2.1.2: 
-            ffmpeg:
+            project:
                 - 'stable'
        ersion.1.5.2:
-           ffmpeg:
+           project:
                 - 'legacy'
     buildscript: |
       curl -sL https://github.com/uclouvain/openjpeg/archive/v${OPENJPEG_VERSION}.tar.gz | \
@@ -226,12 +226,12 @@ libraries:
     url: https://github.com/ultravideo/kvazaar
     versions:
       1.2.0: 
-        ffmpeg:
+        project:
             - 'snapshot'
             - 'testing'
             - 'stable'
       0.6.1:
-        ffmpeg:
+        project:
             - 'legacy'
     buildscript: |
       curl -sLO https://github.com/ultravideo/kvazaar/archive/v${KVAZAAR_VERSION}.tar.gz ; \
@@ -248,10 +248,10 @@ libraries:
     url: https://aomedia.googlesource.com/aom/+archive/master.tar.gz/
     versions:
       master:
-        ffmpeg:
+        project:
           - 'snapshot'
       v0.1.0:
-        ffmpeg:
+        project:
           - 'snapshot'
     buildscript: |
         curl -sLO https://aomedia.googlesource.com/aom/+archive/${AOM_VERSION}.tar.gz ; \

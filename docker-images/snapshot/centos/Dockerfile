@@ -68,21 +68,6 @@ rm -rf ${dir}
 
 
 
-ARG X264_VERSION=20171104-2245-stable
-RUN set -e ;\
-dir=/tmp/x264 ;\
-mkdir -p ${dir} ;\
-cd ${dir} ;\
-if echo ${X264_VERSION} | grep -q '^last'; then \
-    curl -sL https://download.videolan.org/pub/videolan/x264/snapshots/${X264_VERSION}_x264.tar.bz2 | tar -jx --strip-components=1 ; \
-else \
-    curl -sL https://download.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-${X264_VERSION}.tar.bz2 | tar -jx --strip-components=1 ; \
-fi ; \
-    ./configure --prefix="${PREFIX}" --enable-shared --enable-pic ; \
-make ; \
-make install ; \
-rm -rf ${dir}
-
 
 
 ARG X265_MD5SUM=4d318be1f19b58985432a144bd054572

@@ -95,7 +95,7 @@ rm -rf ${dir}
 
 
 
-ARG X264_VERSION=20171104-2245-stable
+ARG X264_VERSION=20180210-2245-stable
 RUN set -e ;\
 dir=/tmp/x264 ;\
 mkdir -p ${dir} ;\
@@ -286,21 +286,6 @@ make PREFIX=${PREFIX} install ; \
 rm -rf ${dir}
 
 
-
-ARG AOM_VERSION=master
-RUN set -e; \
-dir=/tmp/aom ; \
-mkdir -p ${dir} ; \
-cd ${dir} ; \
-curl -sLO https://aomedia.googlesource.com/aom/+archive/${AOM_VERSION}.tar.gz ; \
-tar -zx -f ${AOM_VERSION}.tar.gz ; \
-rm -rf CMakeCache.txt CMakeFiles ; \
-mkdir -p ../aom_build ; \
-cd ../aom_build ; \ 
-cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" -DBUILD_SHARED_LIBS=1 ../aom; \
-make ; \
-make install ; \
-rm -rf ${dir}
 
 
 

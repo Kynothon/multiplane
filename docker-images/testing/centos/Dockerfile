@@ -260,21 +260,6 @@ rm -rf ${dir}
 
 
 
-ARG AOM_VERSION=master
-RUN set -e; \
-dir=/tmp/aom ; \
-mkdir -p ${dir} ; \
-cd ${dir} ; \
-curl -sLO https://aomedia.googlesource.com/aom/+archive/${AOM_VERSION}.tar.gz ; \
-tar -zx -f ${AOM_VERSION}.tar.gz ; \
-rm -rf CMakeCache.txt CMakeFiles ; \
-mkdir -p ../aom_build ; \
-cd ../aom_build ; \ 
-cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" -DBUILD_SHARED_LIBS=1 ../aom; \
-make ; \
-make install ; \
-rm -rf ${dir}
-
 
 
 FROM        base

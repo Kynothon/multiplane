@@ -1,5 +1,5 @@
 project snapshot on centos:centos7
- - x264: 20171104-2245-stable
+ - x264: 
  - x265: 2.6
  - opencoreamr: 0.1.5
  - ogg: 1.3.3

@@ -137,7 +137,6 @@ if options.show
 end
 
 dockerfile_template = File.new(File.join(cwd, "Dockerfile.erb")).read()
-
 renderer = ERB.new(dockerfile_template)
 puts output = renderer.result()
 
