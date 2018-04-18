@@ -5,6 +5,10 @@ env:
   matrix:
   - VERSION=stable VARIANT=alpine
   - VERSION=stable VARIANT=debian
+  - VERSION=testing VARIANT=alpine
+  - VERSION=testing VARIANT=debian
+  - VERSION=legacy VARIANT=alpine
+  - VERSION=legacy VARIANT=debian
   - VERSION=snapshot VARIANT=alpine
   - VERSION=snapshot VARIANT=debian
   global:
