@@ -51,6 +51,10 @@ libraries:
   x265:
     url: https://bitbucket.org/multicoreware/x265/wiki/Home
     versions:
+      '2.8':
+        md5sum: b68dcd4e8a495e53e53034a11fec5eb9
+      '2.7':
+        md5sum: b0d7d20da2a418fa4f53a559946ea079
       '2.6':
         md5sum: 4d318be1f19b58985432a144bd054572
       '2.5':
@@ -72,7 +76,7 @@ libraries:
       0.1.4:
         sha1sum: 905cce84963a241dc058fb42357259952ce2e4ab
     buildscript: |
-        curl -sLO https://cfhcable.dl.sourceforge.net/project/opencore-amr/opencore-amr/opencore-amr-${OPENCOREAMR_VERSION}.tar.gz ; \
+        curl -sLO https://superb-sea2.dl.sourceforge.net/project/opencore-amr/opencore-amr/opencore-amr-${OPENCOREAMR_VERSION}.tar.gz ; \
         echo "${OPENCOREAMR_SHA1SUM}  opencore-amr-${OPENCOREAMR_VERSION}.tar.gz" | \
         sha1sum --check ; \
         tar -zx --strip-components=1 -f opencore-amr-${OPENCOREAMR_VERSION}.tar.gz ; \
@@ -131,6 +135,7 @@ libraries:
   fdkaac:
     url: https://github.com/mstorsjo/fdk-aac
     versions:
+      0.1.6:
       0.1.5: 
     buildscript: |
       curl -sL https://github.com/mstorsjo/fdk-aac/archive/v${FDKAAC_VERSION}.tar.gz | \
@@ -177,6 +182,8 @@ libraries:
   vorbis:
     url: https://www.vorbis.org
     versions:
+      1.3.6:
+        sha256sum: 6ed40e0241089a42c48604dc00e362beee00036af2d8b3f46338031c9e0351cb
       1.3.5:
         sha256sum: 6efbcecdd3e5dfbf090341b485da9d176eb250d893e3eb378c428a2db38301ce
     buildscript: |
@@ -250,9 +257,14 @@ libraries:
       master:
         project:
           - 'snapshot'
+      v1.0.0:
+        project:
+          - 'snapshot'
+          - 'testing'
       v0.1.0:
         project:
           - 'snapshot'
+          - 'testing'
     buildscript: |
         curl -sLO https://aomedia.googlesource.com/aom/+archive/${AOM_VERSION}.tar.gz ; \
         tar -zx -f ${AOM_VERSION}.tar.gz ; \

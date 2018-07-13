@@ -40,7 +40,7 @@ RUN set -e; \
 dir=/tmp/opencore-amr ; \
 mkdir -p ${dir} ; \
 cd ${dir} ; \
-curl -sLO https://cfhcable.dl.sourceforge.net/project/opencore-amr/opencore-amr/opencore-amr-${OPENCOREAMR_VERSION}.tar.gz ; \
+curl -sLO https://superb-sea2.dl.sourceforge.net/project/opencore-amr/opencore-amr/opencore-amr-${OPENCOREAMR_VERSION}.tar.gz ; \
 echo "${OPENCOREAMR_SHA1SUM}  opencore-amr-${OPENCOREAMR_VERSION}.tar.gz" | \
 sha1sum --check ; \
 tar -zx --strip-components=1 -f opencore-amr-${OPENCOREAMR_VERSION}.tar.gz ; \
@@ -85,8 +85,8 @@ rm -rf ${dir}
 
 
 
-ARG X265_MD5SUM=4d318be1f19b58985432a144bd054572
-ARG X265_VERSION=2.6
+ARG X265_MD5SUM=b68dcd4e8a495e53e53034a11fec5eb9
+ARG X265_VERSION=2.8
 RUN set -e; \
 dir=/tmp/x265 ; \
 mkdir -p ${dir} ; \
@@ -116,7 +116,7 @@ rm -rf ${dir}
 
 
 
-ARG FDKAAC_VERSION=0.1.5
+ARG FDKAAC_VERSION=0.1.6
 RUN set -e; \
 dir=/tmp/fdkaac ; \
 mkdir -p ${dir} ; \
@@ -178,8 +178,8 @@ rm -rf ${dir}
 
 
     
-ARG VORBIS_SHA256SUM=6efbcecdd3e5dfbf090341b485da9d176eb250d893e3eb378c428a2db38301ce
-ARG VORBIS_VERSION=1.3.5
+ARG VORBIS_SHA256SUM=6ed40e0241089a42c48604dc00e362beee00036af2d8b3f46338031c9e0351cb
+ARG VORBIS_VERSION=1.3.6
 RUN set -e; \
 dir=/tmp/vorbis ; \
 mkdir -p ${dir} ; \
@@ -259,6 +259,21 @@ make PREFIX=${PREFIX} install ; \
 rm -rf ${dir}
 
 
+
+ARG AOM_VERSION=v1.0.0
+RUN set -e; \
+dir=/tmp/aom ; \
+mkdir -p ${dir} ; \
+cd ${dir} ; \
+curl -sLO https://aomedia.googlesource.com/aom/+archive/${AOM_VERSION}.tar.gz ; \
+tar -zx -f ${AOM_VERSION}.tar.gz ; \
+rm -rf CMakeCache.txt CMakeFiles ; \
+mkdir -p ../aom_build ; \
+cd ../aom_build ; \ 
+cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" -DBUILD_SHARED_LIBS=1 ../aom; \
+make ; \
+make install ; \
+rm -rf ${dir}
 
 
 
